@@ -17,7 +17,7 @@ from training.optimizers import MultiSGD
 from training.dataset import get_dataflow, batch_dataflow
 from training.dataflow import COCODataPaths
 
-
+#TODO: Adjust batch size and other parameters
 batch_size = 10
 base_lr = 4e-5 # 2e-5
 momentum = 0.9
@@ -184,6 +184,7 @@ if __name__ == '__main__':
 
     # prepare generators
 
+    #TODO: Adjust paths, Attention with the validation images since they are used for training as well
     curr_dir = os.path.dirname(__file__)
     annot_path_train = os.path.join(curr_dir, '../dataset/annotations/person_keypoints_train2017.json')
     img_dir_train = os.path.abspath(os.path.join(curr_dir, '../dataset/train2017/'))

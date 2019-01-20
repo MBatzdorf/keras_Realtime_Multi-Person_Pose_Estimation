@@ -20,22 +20,20 @@ class JointsLoader:
         else:
             return None
 
-    num_joints = 18
+    num_joints = 7
 
     num_joints_and_bkg = num_joints + 1
 
-    num_connections = 19
+    num_connections = 10
 
-    idx_in_coco = [0, lambda x: JointsLoader._get_neck(x, 5, 6), 6, 8,
-                   10, 5, 7, 9, 12, 14, 16, 11, 13, 15, 2, 1, 4, 3]
+    idx_in_coco = [0, 1, 2, 3, 4, 5, 6]
 
     idx_in_coco_str = [
-        'Nose','Neck','RShoulder','RElbow','RWrist','LShoulder','LElbow','LWrist',
-        'RHip','RKnee','RAnkle','LHip','LKnee','LAnkle','REye','LEye','REar','LEar']
+        'Tip', 'BottomCenter', 'BottomLeft', 'BottomRight', 'TopCenter', 'TopLeft', 'TopRight']
 
     joint_pairs = list(zip(
-        [1, 8, 9, 1, 11, 12, 1, 2, 3, 2, 1, 5, 6, 5, 1, 0, 0, 14, 15],
-        [8, 9, 10, 11, 12, 13, 2, 3, 4, 16, 5, 6, 7, 17, 0, 14, 15, 16, 17]))
+        [0, 0, 0, 1, 1, 1, 4, 4, 2, 3],
+        [1, 2, 3, 2, 3, 4, 5, 6, 5, 6]))
 
     @staticmethod
     def from_coco_keypoints(all_keypoints, w ,h):
@@ -203,7 +201,7 @@ class CocoDataFlow(RNGDataFlow):
                     # skip this person if parts number is too low or if
                     # segmentation area is too small
 
-                    if person_meta["num_keypoints"] < 5 or person_meta["area"] < 32 * 32:
+                    if person_meta["num_keypoints"] < 3 or person_meta["area"] < 32 * 32:  #TODO: Check if required area is too small/big
                         masks.append(coco.annot.annToRLE(person_meta))
                         continue
 

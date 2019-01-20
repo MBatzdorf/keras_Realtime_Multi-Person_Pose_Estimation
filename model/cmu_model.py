@@ -105,7 +105,7 @@ def stageT_block(x, num_p, stage, branch, weight_decay):
 
 def apply_mask(x, mask1, mask2, num_p, stage, branch):
     w_name = "weight_stage%d_L%d" % (stage, branch)
-    if num_p == 38:
+    if num_p == 20:
         w = Multiply(name=w_name)([x, mask1]) # vec_weight
 
     else:
@@ -116,12 +116,12 @@ def apply_mask(x, mask1, mask2, num_p, stage, branch):
 def get_training_model(weight_decay):
 
     stages = 6
-    np_branch1 = 38
-    np_branch2 = 19
+    np_branch1 = 20
+    np_branch2 = 8
 
     img_input_shape = (None, None, 3)
-    vec_input_shape = (None, None, 38)
-    heat_input_shape = (None, None, 19)
+    vec_input_shape = (None, None, 20)
+    heat_input_shape = (None, None, 8)
 
     inputs = []
     outputs = []
@@ -175,8 +175,8 @@ def get_training_model(weight_decay):
 
 def get_testing_model():
     stages = 6
-    np_branch1 = 38
-    np_branch2 = 19
+    np_branch1 = 20
+    np_branch2 = 8
 
     img_input_shape = (None, None, 3)
 

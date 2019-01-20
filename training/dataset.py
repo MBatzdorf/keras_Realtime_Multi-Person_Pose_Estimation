@@ -15,10 +15,10 @@ from training.label_maps import create_heatmap, create_paf
 
 
 ALL_PAF_MASK = np.repeat(
-    np.ones((46, 46, 1), dtype=np.uint8), 38, axis=2)
+    np.ones((46, 46, 1), dtype=np.uint8), 20, axis=2)
 
 ALL_HEATMAP_MASK = np.repeat(
-    np.ones((46, 46, 1), dtype=np.uint8), 19, axis=2)
+    np.ones((46, 46, 1), dtype=np.uint8), 8, axis=2)
 
 AUGMENTORS_LIST = [
         ScaleAug(scale_min=0.5,
@@ -34,7 +34,7 @@ AUGMENTORS_LIST = [
         CropAug(368, 368, center_perterb_max=40, border_value=(128, 128, 128),
                  mask_border_val=1),
 
-        FlipAug(num_parts=18, prob=0.5),
+        FlipAug(num_parts=8, prob=0.5),
     ]
 
 
@@ -163,8 +163,8 @@ def build_sample(components):
         mask_paf = ALL_PAF_MASK
         mask_heatmap = ALL_HEATMAP_MASK
     else:
-        mask_paf = create_all_mask(meta.mask, 38, stride=8)
-        mask_heatmap = create_all_mask(meta.mask, 19, stride=8)
+        mask_paf = create_all_mask(meta.mask, 20, stride=8)
+        mask_heatmap = create_all_mask(meta.mask, 8, stride=8)
 
     heatmap = create_heatmap(JointsLoader.num_joints_and_bkg, 46, 46,
                              meta.aug_joints, 7.0, stride=8)
@@ -223,6 +223,8 @@ if __name__ == '__main__':
     parameter of PrefetchDataZMQ. Ideally it should reflect the number of cores 
     in your hardware
     """
+
+    #TODO: Adjust batch size and image/annotation paths
     batch_size = 10
     curr_dir = os.path.dirname(__file__)
     annot_path = os.path.join(curr_dir, '../dataset/annotations/person_keypoints_val2017.json')
