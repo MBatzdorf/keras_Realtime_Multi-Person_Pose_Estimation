@@ -29,7 +29,7 @@ class JointsLoader:
     idx_in_coco = [0, 1, 2, 3, 4, 5, 6]
 
     idx_in_coco_str = [
-        'Tip', 'BottomCenter', 'BottomLeft', 'BottomRight', 'TopCenter', 'TopLeft', 'TopRight']
+        'pen_tip', 'pen_body_bottom_center', 'pen_body_bottom_left', 'pen_body_bottom_right', 'pen_body_top_center', 'pen_body_top_left', 'pen_body_top_right']
 
     joint_pairs = list(zip(
         [0, 0, 0, 1, 1, 1, 4, 4, 2, 3],
