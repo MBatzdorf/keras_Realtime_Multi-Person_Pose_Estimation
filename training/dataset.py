@@ -227,8 +227,8 @@ if __name__ == '__main__':
     #TODO: Adjust batch size and image/annotation paths
     batch_size = 10
     curr_dir = os.path.dirname(__file__)
-    annot_path = os.path.join(curr_dir, '../dataset/annotations/person_keypoints_val2017.json')
-    img_dir = os.path.abspath(os.path.join(curr_dir, '../dataset/val2017/'))
+    annot_path = os.path.join(curr_dir, '../dataset/annotations/pen_keypoints_validation.json')
+    img_dir = os.path.abspath(os.path.join(curr_dir, '../dataset/validation/'))
     df = CocoDataFlow((368, 368), COCODataPaths(annot_path, img_dir))#, select_ids=[1000])
     df.prepare()
     df = MapData(df, read_img)

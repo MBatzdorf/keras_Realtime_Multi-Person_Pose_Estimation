@@ -12,7 +12,7 @@ from keras.layers.convolutional import Conv2D
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
-from model.cmu_model import get_training_model
+from cmu_model import get_training_model
 from training.optimizers import MultiSGD
 from training.dataset import get_dataflow, batch_dataflow
 from training.dataflow import COCODataPaths
@@ -186,10 +186,10 @@ if __name__ == '__main__':
 
     #TODO: Adjust paths, Attention with the validation images since they are used for training as well
     curr_dir = os.path.dirname(__file__)
-    annot_path_train = os.path.join(curr_dir, '../dataset/annotations/person_keypoints_train2017.json')
-    img_dir_train = os.path.abspath(os.path.join(curr_dir, '../dataset/train2017/'))
-    annot_path_val = os.path.join(curr_dir, '../dataset/annotations/person_keypoints_val2017.json')
-    img_dir_val = os.path.abspath(os.path.join(curr_dir, '../dataset/val2017/'))
+    annot_path_train = os.path.join(curr_dir, '../dataset/annotations/pen_keypoints_train.json')
+    img_dir_train = os.path.abspath(os.path.join(curr_dir, '../dataset/train/'))
+    annot_path_val = os.path.join(curr_dir, '../dataset/annotations/pen_keypoints_validation.json')
+    img_dir_val = os.path.abspath(os.path.join(curr_dir, '../dataset/validation/'))
 
     # get dataflow of samples from training set and validation set (we use validation set for training as well)
 
