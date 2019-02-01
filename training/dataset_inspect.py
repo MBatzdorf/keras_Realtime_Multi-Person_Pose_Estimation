@@ -154,7 +154,6 @@ if __name__ == '__main__':
     batch_size = 10
     curr_dir = os.path.dirname(__file__)
 
-    #TODO: Adjust paths
     annot_path = os.path.join(curr_dir, '../dataset/annotations/pen_keypoints_validation.json')
     img_dir = os.path.abspath(os.path.join(curr_dir, '../dataset/validation/'))
     df = CocoDataFlow((368, 368),

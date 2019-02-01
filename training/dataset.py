@@ -224,7 +224,6 @@ if __name__ == '__main__':
     in your hardware
     """
 
-    #TODO: Adjust batch size and image/annotation paths
     batch_size = 10
     curr_dir = os.path.dirname(__file__)
     annot_path = os.path.join(curr_dir, '../dataset/annotations/pen_keypoints_validation.json')

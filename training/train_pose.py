@@ -17,7 +17,7 @@ from training.optimizers import MultiSGD
 from training.dataset import get_dataflow, batch_dataflow
 from training.dataflow import COCODataPaths
 
-#TODO: Adjust batch size and other parameters
+
 batch_size = 10
 base_lr = 4e-5 # 2e-5
 momentum = 0.9
@@ -28,6 +28,7 @@ stepsize = 136106 #68053   // after each stepsize iterations update learning rat
 max_iter = 200000 # 600000
 
 weights_best_file = "weights.best.h5"
+weights_per_epoch_file = "weights-{epoch:02d}-{loss:.2f}.h5"
 training_log = "training.csv"
 logs_dir = "./logs"
 
@@ -183,8 +184,6 @@ if __name__ == '__main__':
     last_epoch = restore_weights(weights_best_file, model)
 
     # prepare generators
-
-    #TODO: Adjust paths, Attention with the validation images since they are used for training as well
     curr_dir = os.path.dirname(__file__)
     annot_path_train = os.path.join(curr_dir, '../dataset/annotations/pen_keypoints_train.json')
     img_dir_train = os.path.abspath(os.path.join(curr_dir, '../dataset/train/'))
@@ -220,14 +219,17 @@ if __name__ == '__main__':
                           iterations_per_epoch=iterations_per_epoch
                           )
     lrate = LearningRateScheduler(_step_decay)
-    checkpoint = ModelCheckpoint(weights_best_file, monitor='loss',
-                                 verbose=0, save_best_only=False,
+    checkpoint_best = ModelCheckpoint(weights_best_file, monitor='loss',
+                                 verbose=0, save_best_only=True,
                                  save_weights_only=True, mode='min', period=1)
+    checkpoint = ModelCheckpoint(weights_per_epoch_file, monitor='loss',
+                                 verbose=0, save_best_only=False,
+                                 save_weights_only=True, mode='min', period=50)
     csv_logger = CSVLogger(training_log, append=True)
     tb = TensorBoard(log_dir=logs_dir, histogram_freq=0, write_graph=True,
                      write_images=False)
 
-    callbacks_list = [lrate, checkpoint, csv_logger, tb]
+    callbacks_list = [lrate, checkpoint_best, checkpoint, csv_logger, tb]
 
     # sgd optimizer with lr multipliers
 

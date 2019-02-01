@@ -6,7 +6,7 @@ from training.dataflow import JointsLoader
 
 def create_heatmap(num_maps, height, width, all_joints, sigma, stride):
     """
-    Creates stacked heatmaps for all joints + background. For 18 joints
+    Creates stacked heatmaps for all joints + background. For 8 joints
     we would get an array height x width x 19.
     Size width and height should be the same as output from the network
     so this heatmap can be used to evaluate a loss function.

@@ -201,7 +201,7 @@ class CocoDataFlow(RNGDataFlow):
                     # skip this person if parts number is too low or if
                     # segmentation area is too small
 
-                    if person_meta["num_keypoints"] < 3 or person_meta["area"] < 32 * 32:  #TODO: Check if required area is too small/big
+                    if person_meta["num_keypoints"] < 3 or person_meta["area"] < 32 * 32:
                         masks.append(coco.annot.annToRLE(person_meta))
                         continue
 
@@ -246,7 +246,7 @@ class CocoDataFlow(RNGDataFlow):
                     main_person.all_joints = JointsLoader.from_coco_keypoints(keypoints, w, h)
                     self.all_meta.append(main_person)
 
-                if i % 1000 == 0:
+                if i % 50 == 0:
                     print("Loading image annot {}/{}".format(i, len(ids)))
 
     def save(self, path):
